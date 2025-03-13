@@ -1,0 +1,31 @@
+*******************************************************************************
+* CDL netlist
+*
+* Library : Training
+* Top Cell Name: XOR
+* View Name: schematic
+* Netlist created: 03.Aug.2024 02:41:43
+*******************************************************************************
+
+*.SCALE METER
+*.GLOBAL vdd gnd
+
+*******************************************************************************
+* Library Name: Training
+* Cell Name:    XOR
+* View Name:    schematic
+*******************************************************************************
+
+.SUBCKT XOR VDD B ~A ~B GND A Y
+*.PININFO VDD:B Y:O B:I ~A:I ~B:I GND:B A:I
+
+M6 n2 ~B GND GND C5NNMOS w=200n l=30n m=1
+M4 Y ~A n2 n2 C5NNMOS w=200n l=30n m=1
+M7 n2 A GND GND C5NNMOS w=200n l=30n m=1
+M5 Y B n2 n2 C5NNMOS w=200n l=30n m=1
+M2 Y ~B n6 n7 C5NPMOS w=1200n l=30n m=1
+M3 Y B n3 n3 C5NPMOS w=1200n l=30n m=1
+M1 n6 A VDD VDD C5NPMOS w=1200n l=30n m=1
+M0 n3 ~A n4 n4 C5NPMOS w=1200n l=30n m=1
+.ENDS
+

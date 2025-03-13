@@ -1,0 +1,24 @@
+*******************************************************************************
+* CDL netlist
+*
+* Library : Training
+* Top Cell Name: inverter
+* View Name: extracted
+* Netlist created: 22.Jul.2024 18:43:50
+*******************************************************************************
+
+*.SCALE METER
+*.GLOBAL vdd gnd
+
+*******************************************************************************
+* Library Name: Training
+* Cell Name:    inverter
+* View Name:    extracted
+*******************************************************************************
+
+.SUBCKT inverter VDD Y A GND
+*.PININFO VDD:B Y:B A:B GND:B
+
+M1 VDD A Y n4 C5NPMOS w=2.9e-7 l=3e-8 as=2.755e-14 ps=7.7e-7 ad=2.755e-14 pd=7.7e-7
+M0 GND A Y GND C5NNMOS w=1.9e-7 l=3e-8 as=1.805e-14 ps=5.7e-7 ad=1.805e-14 pd=5.7e-7
+.ENDS
