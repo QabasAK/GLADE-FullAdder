@@ -1,0 +1,52 @@
+* CMOS Inverter Voltage Transfer Characteristic
+
+*
+*TRANSISTOR
+*Mname DRAIN GATE SOURCE SUBSTRATE MODEL WIDTH   LENGTH
+*      NODE  NODE NODE   NODE      NAME  MICRONS MICRONS
+*----- ----- ---- ------ --------- ----  ------- ------
+M1     3     2    1      1         PCH   W=3.6U  L=1.2U
+
+M2     3     2    0      0         NCH   W=3.6U  L=1.2U
+
+*
+*CAPACITOR
+*Cname +NODE -NODE VALUE(Picofarads)
+*----- ----- ----- -----------------
+C3     3     0     0.1P
+
+*
+* INDEPENDANT VOLTAGE SOURCE
+*
+*Vname +NODE -NODE VALUE
+*----- ----- ----- -----
+VCC    1     0     DC=5.0
+
+
+* The following two lines are for DC analysis
+VIN    2     0
+
+.DC VIN 0 5 0.1
+
+
+* TEMPERATURE SETTING
+
+.OPTIONS TEMP=25 METHOD=GEAR
+
+*MODEL NAME TYPE
+*----- ---- ----
+.MODEL NCH  NMOS (level=2 LD=0.15U TOX=200.0E-10 NSUB=5.37E+15
++ VTO=0.74 KP=8.0E-05 GAMMA=0.54 PHI=0.6 U0=656 UEXP=0.157 UCRIT=31444
++ DELTA=2.34 VMAX=55261 Xj=0.2U LAMBDA=0.037 NFS=1E+12 NEFF=1.001 NSS=1E+11
++ TPG=1.0 RSH=70.00
++ CGDO=4.3E-10 CGSO=4.3E-10 Cj=0.0003 Mj=0.66
++ CJSW=8.0E-10 MJSW=0.24 PB=0.58
+
+.MODEL PCH PMOS(level=2 LD=0.15U TOX=200.0E-10 NSUB=4.33E+15
++ VTO=-0.74 KP=2.70E-05 GAMMA=0.58 PHI=0.6 U0=262 UEXP=0.324 UCRIT=65720
++ DELTA=1.79 VMAX=25694 Xj=0.25U LAMBDA=0.061 NFS=1E+12 NEFF=1.001 NSS=1E+11
++ TPG=1.0 RSH=121.00
++ CGDO=4.3E-10 CGSO=4.3E-10 Cj=0.0005 Mj=0.51
++ CJSW=1.35E-10 MJSW=0.24 PB=0.64
+
+.END

@@ -1,0 +1,40 @@
+*******************************************************************************
+* Simplified Full Adder Netlist for Debugging
+*******************************************************************************
+.SUBCKT FullAdder A B Cin SUM Cout
+*.PININFO Cout:O B:I Cin:I SUM:O A:I
+
+M1 n1 A VDD VDD PCH w=1200n l=30n
+M2 n1 A GND GND NCH w=200n l=30n
+M3 SUM n1 VDD VDD PCH w=1200n l=30n
+M4 SUM n1 GND GND NCH w=200n l=30n
+M34 Cout SUM VDD VDD PCH w=1200n l=30n
+
+.ENDS FullAdder
+
+.MODEL NCH  NMOS(level=2 LD=0.15U TOX=200.0E-10 NSUB=5.37E+15 VTO=0.74 KP=8.0E-05 GAMMA=0.54 PHI=0.6 U0=656 UEXP=0.157 UCRIT=31444 DELTA=2.34 VMAX=55261 Xj=0.2U LAMBDA=0.037 NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 CGDO=4.3E-10 CGSO=4.3E-10 Cj=0.0003 Mj=0.66 CJSW=8.0E-10 MJSW=0.24 PB=0.58)
+.MODEL PCH PMOS(level=2 LD=0.15U TOX=200.0E-10 NSUB=4.33E+15 VTO=-0.74 KP=2.70E-05 GAMMA=0.58 PHI=0.6 U0=262 UEXP=0.324 UCRIT=65720 DELTA=1.79 VMAX=25694 Xj=0.25U LAMBDA=0.061 NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=121.00 CGDO=4.3E-10 CGSO=4.3E-10 Cj=0.0005 Mj=0.51 CJSW=1.35E-10 MJSW=0.24 PB=0.64)
+
+X100 A B Cin SUM Cout FullAdder
+
+VDD VDD 0 DC 5V
+
+* Define input square wave sources using PULSE
+VA A 0 PULSE(0V 5V 0ns 1ns 1ns 25ns 50ns)
+VB B 0 PULSE(0V 5V 0ns 1ns 1ns 50ns 100ns)
+VCin Cin 0 PULSE(0V 5V 0ns 1ns 1ns 100ns 200ns)
+
+* Define capacitors at the output nodes
+C13 SUM 0 0.1P
+C14 Cout 0 0.1P
+
+* Transient analysis to observe waveforms
+.TRAN 10ns 600ns
+
+* Print the results (optional, for console output)
+.PRINT TRAN V(SUM) V(Cout)
+
+* Probe the nodes for plotting
+.PROBE TRAN V(SUM) V(Cout)
+
+.END

@@ -1,0 +1,80 @@
+*******************************************************************************
+* CDL netlist
+*
+* Library : Training
+* Top Cell Name: Full Adder
+* View Name: schematic
+* Netlist created: 06.Aug.2024 00:18:53
+*******************************************************************************
+
+*.SCALE METER
+*.GLOBAL VDD GND
+
+*******************************************************************************
+* Library Name: Training
+* Cell Name:    Full Adder
+* View Name:    schematic
+*******************************************************************************
+
+.SUBCKT Full Adder A B Cin SUM Cout
+*.PININFO Cout:O B:I Cin:I SUM:O A:I
+
+M29 n15 n1 VDD VDD C5NPMOS w=1200n l=30n m=1
+M20 n39 Cin VDD VDD C5NPMOS w=1200n l=30n m=1
+M2 n17 B VDD VDD C5NPMOS w=300n l=30n m=1
+M24 n18 n17 GND GND C5NNMOS w=200n l=30n m=1
+M37 n12 n42 GND GND C5NNMOS w=200n l=30n m=1
+M38 n11 n18 VDD VDD C5NPMOS w=300n l=30n m=1
+M39 n11 n18 GND GND C5NNMOS w=200n l=30n m=1
+M26 n18 n17 n41 VDD C5NPMOS w=1200n l=30n m=1
+M27 n18 n35 GND GND C5NNMOS w=200n l=30n m=1
+M22 SUM n33 n22 GND C5NNMOS w=200n l=30n m=1
+M0 n35 A VDD VDD C5NPMOS w=300n l=30n m=1
+M14 n33 B n28 GND C5NNMOS w=200n l=30n m=1
+M4 n1 n33 VDD VDD C5NPMOS w=300n l=30n m=1
+M12 n37 A VDD VDD C5NPMOS w=1200n l=30n m=1
+M18 SUM n33 n24 VDD C5NPMOS w=1200n l=30n m=1
+M6 n16 Cin VDD VDD C5NPMOS w=300n l=30n m=1
+M17 SUM n16 n22 GND C5NNMOS w=200n l=30n m=1
+M23 n22 n1 GND GND C5NNMOS w=200n l=30n m=1
+M28 n42 n16 GND GND C5NNMOS w=200n l=30n m=1
+M19 n24 n16 VDD VDD C5NPMOS w=1200n l=30n m=1
+M16 n22 Cin GND GND C5NNMOS w=200n l=30n m=1
+M11 n30 n35 VDD VDD C5NPMOS w=1200n l=30n m=1
+M9 n33 n35 n28 GND C5NNMOS w=200n l=30n m=1
+M15 n28 n17 GND GND C5NNMOS w=200n l=30n m=1
+M34 Cout n12 VDD VDD C5NPMOS w=1200n l=30n m=1
+M36 n12 n42 VDD VDD C5NPMOS w=300n l=30n m=1
+M25 n41 n35 VDD VDD C5NPMOS w=1200n l=30n m=1
+M30 n42 n16 n15 VDD C5NPMOS w=1200n l=30n m=1
+M35 Cout n11 n44 GND C5NNMOS w=200n l=30n m=1
+M5 n1 n33 GND GND C5NNMOS w=200n l=30n m=1
+M3 n17 B GND GND C5NNMOS w=200n l=30n m=1
+M21 SUM n1 n39 VDD C5NPMOS w=1200n l=30n m=1
+M7 n16 Cin GND GND C5NNMOS w=200n l=30n m=1
+M8 n28 A GND GND C5NNMOS w=200n l=30n m=1
+M32 n44 n12 GND GND C5NNMOS w=200n l=30n m=1
+M31 n42 n1 GND GND C5NNMOS w=200n l=30n m=1
+M13 n33 n17 n37 VDD C5NPMOS w=1200n l=30n m=1
+M1 n35 A GND GND C5NNMOS w=200n l=30n m=1
+M33 Cout n11 VDD VDD C5NPMOS w=1200n l=30n m=1
+M10 n33 B n30 VDD C5NPMOS w=1200n l=30n m=1
+
+C13 SUM 0 0.1P
+C14 Cout 0 0.1P
+VDD VDD 0 DC 5V
+
+VA 1 0 PULSE(0V 5V 0ns 1ns 1ns 25ns 50ns)
+VB 2 0 PULSE(0V 5V 0ns 1ns 1ns 50ns 100ns)
+VCin 7 0 PULSE(0V 5V 0ns 1ns 1ns 100ns 200ns)
+
+.TRAN 1ns 600ns
+.PRINT TRAN V(12) V(13)
+.PROBE TRAN V(12) V(13)
+.ENDS
+
+
+
+
+
+
