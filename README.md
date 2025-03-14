@@ -82,21 +82,27 @@ Now, instead of creating different instances and writing the code from scratch, 
 ```
 * Instantiate the Full Adder subcircuit
 X100 1 2 7 12 13 FullAdder
+
 * Define power supply
 VDD VDD 0 DC 5V
+
 * Define input square wave sources using PULSE
 VA 1 0 PULSE(0V 5V 0ns 1ns 1ns 25ns 50ns)
 VB 2 0 PULSE(0V 5V 0ns 1ns 1ns 50ns 100ns)
 VCin 7 0 PULSE(0V 5V 0ns 1ns 1ns 100ns 200ns)
+
 * Define capacitors at the output nodes
 C13 12 0 0.1P
 C14 13 0 0.1P
+
 * Transient analysis to observe waveforms
 .TRAN 1ns 600ns
+
 * Print the results (optional, for console output)
 .PRINT TRAN V(12) V(13)
+
 * Probe the nodes for plotting
 .PROBE TRAN V(12) V(13)
 .END
 ```
-The model of the PMOS and NMOS used was taken from Process Technology C5: 0.5µm Process Technology Publication order number C5/D. The size of the transistors was identical to that in GLADE’s full adder with ratio P=6N, voltage of node number 11 is the sum and that of the node 12 is the carry out. 
+The model of the PMOS and NMOS used was taken from Process Technology C5: 0.5µm Process Technology Publication order number C5/D. The size of the transistors was identical to that in GLADE’s full adder with ratio P=6N, voltage of node number 12 is the sum and that of the node 13 is the carry out. 
