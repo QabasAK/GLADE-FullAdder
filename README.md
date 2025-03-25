@@ -98,7 +98,7 @@ C14 13 0 0.1P
 * Transient analysis to observe waveforms
 .TRAN 1ns 600ns
 
-* Print the results (optional, for console output)
+* Print the results
 .PRINT TRAN V(12) V(13)
 
 * Probe the nodes for plotting
